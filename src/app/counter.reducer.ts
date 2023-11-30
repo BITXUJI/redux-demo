@@ -11,17 +11,30 @@ export const initialState = { count: 0 };
 //     on(decrement, (state) => ({ ...state, count: state.count - 1 })),
 //     on(reset, (state) => ({ ...state, count: 0 }))
 // );
+
+// export function counterReducer(state = initialState, action: any) {
+//     switch (action.type) {
+//         case increment.type:
+//             // case increment:
+//             return { ...state, count: state.count + 1 };
+//         case decrement.type:
+//             return { ...state, count: state.count - 1 };
+//         case reset.type:
+//             return { ...state, count: 0 };
+//         default:
+//             return state;
+//     }
+
+// }
 export function counterReducer(state = initialState, action: any) {
     switch (action.type) {
         case increment.type:
-            // case increment:
-            return { ...state, count: state.count + 1 };
+            return Object.assign({}, state, { count: state.count + 1 });
         case decrement.type:
-            return { ...state, count: state.count - 1 };
+            return Object.assign({}, state, { count: state.count - 1 });
         case reset.type:
-            return { ...state, count: 0 };
+            return Object.assign({}, state, { count: 0 });
         default:
             return state;
     }
-
 }
