@@ -1,20 +1,39 @@
-import { Map } from 'immutable';
+import { createReducer, on } from '@ngrx/store';
 import { increment, decrement, reset } from './counter.actions';
+export interface IAppState {
+    count: number;
+}
+export const initialState: IAppState = { count: 0 };
 
-// Define the initial state as an Immutable Map
-const initialState = Map({ count: 0 });
+// export const counterReducer = createReducer(
+//     initialState,
+//     on(increment, (state) => ({ ...state, count: state.count + 1 })),
+//     on(decrement, (state) => ({ ...state, count: state.count - 1 })),
+//     on(reset, (state) => ({ ...state, count: 0 }))
+// );
 
+// export function counterReducer(state = initialState, action: any) {
+//     switch (action.type) {
+//         case increment.type:
+//             // case increment:
+//             return { ...state, count: state.count + 1 };
+//         case decrement.type:
+//             return { ...state, count: state.count - 1 };
+//         case reset.type:
+//             return { ...state, count: 0 };
+//         default:
+//             return state;
+//     }
+
+// }
 export function counterReducer(state = initialState, action: any) {
     switch (action.type) {
         case increment.type:
-            // Increment count using Immutable's update method
-            return state.update('count', count => count + 1);
+            return Object.assign({}, state, { count: state.count + 1 });
         case decrement.type:
-            // Decrement count using Immutable's update method
-            return state.update('count', count => count - 1);
+            return Object.assign({}, state, { count: state.count - 1 });
         case reset.type:
-            // Reset count to 0
-            return state.set('count', 0);
+            return Object.assign({}, state, { count: 0 });
         default:
             return state;
     }

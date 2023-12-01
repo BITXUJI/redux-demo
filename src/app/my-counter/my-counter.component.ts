@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { increment, decrement, reset } from '../counter.actions';
+import { IAppState } from '../counter.reducer';
 
 
 @Component({
@@ -11,8 +12,8 @@ import { increment, decrement, reset } from '../counter.actions';
 export class MyCounterComponent {
   count$: Observable<number>;
 
-  constructor(private store: Store<{ counter: Immutable.Map<string, any> }>) {
-    this.count$ = store.select(state => state.counter.get('count'));
+  constructor(private store: Store<{ counter: IAppState }>) {
+    this.count$ = store.select(state => state.counter.count);
 
   }
 
